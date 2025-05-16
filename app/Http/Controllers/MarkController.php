@@ -18,15 +18,7 @@ class MarkController extends Controller
     public function index()
     {
         $marks = $this->mark->all();
-        return view('marks',['marks' => $marks]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('mark_create');
+        return response()->json($marks);
     }
 
     /**
@@ -39,39 +31,42 @@ class MarkController extends Controller
       ]);
 
       if($created){
-        return redirect()->back()->with('message', 'Marca cadastrado com sucesso');
+       return response()->json($created, 201);
        }
-       return redirect()->back()->with('message', 'Erro');
+       return response()->json(['message' => 'Erro ao criar marca!'], 500);
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show( $id)
     {
-        //
+        $mark = $this->mark->find($id);
+
+        if (!$mark) {
+            return response()->json(['message' => 'Marca não encontrada'], 404);
+        }
+
+        return response()->json($mark);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Mark $mark)
-    {
-        return view('mark_edit', ['mark' => $mark]);
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(StoreUpdateMarkRequest $request, string $id)
     {
-       $updated = $this->mark->where('id', $id)->update($request->except(['_token', '_method']));
 
-       if($updated){
-        return redirect()->back()->with('message', 'Editado com sucesso');
-       }
-       return redirect()->back()->with('message', 'Erro');
+       $mark = $this->mark->find($id);
+
+        if(!$mark){
+            return response()->json(['message' => 'Marca não encontrada'], 404);
+        }
+
+       $mark->update($request->only('mark'));
+       return response()->json($mark);
        
     }
 
@@ -80,12 +75,12 @@ class MarkController extends Controller
      */
     public function destroy(string $id)
     {
+       $mark = $this->mark->find($id);
+
+       if(!$mark){
+            return response()->json(['message' => 'Marca não encontrada'], 404);
+        }
        $deleted = $this->mark->where('id', $id)->delete();
 
-        if($deleted){
-            return redirect()->route('marks.index')->with('message', 'Excluído com sucesso!');
-        }
-    
-        return redirect()->route('marks.index')->with('message', 'Erro ao excluir!');
-    }
-}
+      return response()->noContent();
+}}

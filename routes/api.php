@@ -2,15 +2,41 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MarkController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\LoanController;
+use App\Http\Controllers\DemandController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProfileController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
 
-Route::get('/marks', [MarkController::class, 'index'])->name('marks.index');
-Route::get('/marks/create', [MarkController::class, 'create'])->name('marks.create');
-Route::post('/marks', [MarkController::class, 'store'])->name('marks.store');
-Route::get('/marks/{mark}', [MarkController::class, 'show'])->name('marks.show');
-Route::get('/marks/{mark}/edit', [MarkController::class, 'edit'])->name('marks.edit');
-Route::put('/marks/{mark}', [MarkController::class, 'update'])->name('marks.update');
-Route::delete('/marks/{mark}', [MarkController::class, 'destroy'])->name('marks.destroy');
+Route::apiResource('marks', MarkController::class);
+
+
+//Route::get('/user', function (Request $request) {
+   // return $request->user();
+//})->middleware('auth:sanctum');
+
+Route::middleware('auth:sanctum')->group(function () {
+
+
+
+    Route::apiResource('products', ProductController::class);
+    
+    Route::apiResource('demands', DemandController::class);
+
+    Route::apiResource('loans', LoanController::class);
+
+    Route::apiResource('loans', LoanController::class);
+
+    Route::apiResource('clients', ClientController::class);
+
+    // Perfil
+    Route::get('/profile', [ProfileController::class, 'show']);
+    Route::put('/profile', [ProfileController::class, 'update']);
+    Route::delete('/profile', [ProfileController::class, 'destroy']);
+
+    // Logout
+    //Route::post('/logout', [AuthController::class, 'logout']);
+
+});
