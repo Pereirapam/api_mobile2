@@ -82,5 +82,5 @@ class MarkController extends Controller
         }
        $deleted = $this->mark->where('id', $id)->delete();
 
-      return response()->noContent();
+      return response()->json(['message' => 'Foi excluido']);
 }}

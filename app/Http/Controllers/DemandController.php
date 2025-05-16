@@ -8,7 +8,6 @@ use App\Models\Mark;
 use App\Models\Demand;
 use Carbon\Carbon;
 
-
 class DemandController extends Controller
 {
     public readonly Demand $demand;
@@ -17,71 +16,66 @@ class DemandController extends Controller
     {
         $this->demand = new Demand();
     }
+
     public function index()
     {
         Carbon::setLocale('pt_BR');
 
         $demands = Demand::with('mark')->get();
 
-        return view('demands', compact('demands'));
-
+        return response()->json($demands);
     }
 
-    public function create()
+    public function store(StoreUpdateDemandRequest $request)
     {
-        $marks = Mark::all();
-
-        return view('demand_create', compact('marks'));
-    }
-
-
-    public function store(StoreUpdateDemandRequest $demands)
-    {
-        Demand::create([
-            'type' => $demands->type,
-            'arrival_date' => $demands->arrival_date,
-            'cycle' => $demands->cycle,
-            'mark_id' =>$demands->mark_id
-
+        $created = Demand::create([
+            'type' => $request->type,
+            'arrival_date' => $request->arrival_date,
+            'cycle' => $request->cycle,
+            'mark_id' => $request->mark_id,
         ]);
 
-        return redirect()->back()->with('message', 'Pedido cadastrado com sucesso');
+        if ($created) {
+            return response()->json($created, 201);
+        }
 
+        return response()->json(['message' => 'Erro ao criar pedido'], 500);
     }
 
     public function show(string $id)
     {
-        //
+        $demand = Demand::with('mark')->find($id);
+
+        if (!$demand) {
+            return response()->json(['message' => 'Pedido não encontrado'], 404);
+        }
+
+        return response()->json($demand);
     }
-
-
-    public function edit(Demand $demand)
-    {
-        $marks = Mark::all();
-        return view('demand_edit', compact('marks', 'demand'));
-    }
-
 
     public function update(StoreUpdateDemandRequest $request, string $id)
     {
-        $updated = $this->demand->where('id', $id)->update($request->except(['_token', '_method']));
-        if ($updated) {
-            return redirect()->back()->with('message', 'Editado com sucesso');
+        $demand = $this->demand->find($id);
+
+        if (!$demand) {
+            return response()->json(['message' => 'Pedido não encontrado'], 404);
         }
-        return redirect()->back()->with('message', 'Erro');
+
+        $demand->update($request->only(['type', 'arrival_date', 'cycle', 'mark_id']));
+
+        return response()->json($demand);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $deleted = $this->demand->where('id', $id)->delete();
+        $demand = $this->demand->find($id);
 
-        if($deleted){
-            return redirect()->route('demands.index')->with('message', 'Excluído com sucesso!');
+        if (!$demand) {
+            return response()->json(['message' => 'Pedido não encontrado'], 404);
         }
-    
-        return redirect()->route('demands.index')->with('message', 'Erro ao excluir!');
+
+        $demand->delete();
+
+        return response()->json(['message' => 'Pedido excluído com sucesso']);
     }
 }

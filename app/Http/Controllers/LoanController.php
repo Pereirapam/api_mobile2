@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Loan;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUpdateLoanRequest;
-use Carbon\Carbon;
 
 class LoanController extends Controller
 {
@@ -13,19 +13,11 @@ class LoanController extends Controller
     public function __construct(){
         $this->loan = new Loan();
     }
+
     public function index()
     {
-        Carbon::setLocale('pt_BR');
         $loans = $this->loan->all();
-        return view('loans',['loans' => $loans]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('loan_create');
+        return response()->json($loans);
     }
 
     /**
@@ -33,14 +25,17 @@ class LoanController extends Controller
      */
     public function store(StoreUpdateLoanRequest $request)
     {
-        Loan::create([
+        $created = $this->loan->create([
             'order' => $request->order,
             'person' => $request->person,
-            'date' => $request->date, 
+            'date' => $request->date,
         ]);
-    
-        return redirect()->back()->with('message', 'Empréstimo registrado, com sucesso');
-    
+
+        if ($created) {
+            return response()->json($created, 201);
+        }
+
+        return response()->json(['message' => 'Erro ao registrar empréstimo!'], 500);
     }
 
     /**
@@ -48,15 +43,13 @@ class LoanController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        $loan = $this->loan->find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Loan $loan)
-    {
-        return view('loan_edit', ['loan' => $loan]);
+        if (!$loan) {
+            return response()->json(['message' => 'Empréstimo não encontrado'], 404);
+        }
+
+        return response()->json($loan);
     }
 
     /**
@@ -64,12 +57,15 @@ class LoanController extends Controller
      */
     public function update(StoreUpdateLoanRequest $request, string $id)
     {
-        $updated = $this->loan->where('id', $id)->update($request->except(['_token', '_method']));
+        $loan = $this->loan->find($id);
 
-       if($updated){
-        return redirect()->back()->with('message', 'Editado com sucesso');
-       }
-       return redirect()->back()->with('message', 'Erro');
+        if (!$loan) {
+            return response()->json(['message' => 'Empréstimo não encontrado'], 404);
+        }
+
+        $loan->update($request->only(['order', 'person', 'date']));
+
+        return response()->json($loan);
     }
 
     /**
@@ -77,12 +73,14 @@ class LoanController extends Controller
      */
     public function destroy(string $id)
     {
-        $deleted = $this->loan->where('id', $id)->delete();
+        $loan = $this->loan->find($id);
 
-        if($deleted){
-            return redirect()->route('loans.index')->with('message', 'Excluído com sucesso!');
+        if (!$loan) {
+            return response()->json(['message' => 'Empréstimo não encontrado'], 404);
         }
-    
-        return redirect()->route('loans.index')->with('message', 'Erro ao excluir!');
+
+        $loan->delete();
+
+        return response()->json(['message' => 'Empréstimo excluído com sucesso']);
     }
 }
