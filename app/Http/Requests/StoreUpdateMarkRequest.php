@@ -22,7 +22,7 @@ class StoreUpdateMarkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'mark' => [
+            'markName' => [
                     'required',
                     'min:1',
                     'max:255',

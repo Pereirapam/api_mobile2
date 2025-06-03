@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mark extends Model
 {
     use HasFactory;
-    protected $fillable = ['mark'];
+    protected $fillable = ['markName'];
 
     public function products()
     {

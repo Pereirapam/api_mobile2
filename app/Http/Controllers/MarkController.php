@@ -18,7 +18,7 @@ class MarkController extends Controller
     public function index()
     {
         $marks = $this->mark->all();
-        return response()->json($marks);
+        return response()->json(['data' => $marks]);
     }
 
     /**
@@ -27,7 +27,7 @@ class MarkController extends Controller
     public function store(StoreUpdateMarkRequest $request)
     {
       $created = $this->mark->create([
-            'mark' => $request -> input('mark')
+            'markName' => $request -> input('markName')
       ]);
 
       if($created){
@@ -65,7 +65,7 @@ class MarkController extends Controller
             return response()->json(['message' => 'Marca não encontrada'], 404);
         }
 
-       $mark->update($request->only('mark'));
+        $mark->update($request->only('markName'));
        return response()->json($mark);
        
     }

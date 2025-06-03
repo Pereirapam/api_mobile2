@@ -12,6 +12,8 @@ use App\Http\Controllers\DemandController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 
+Route::apiResource('marks', MarkController::class);
+
 
 Route::post('/register', function (Request $request) {
     $request->validate([
@@ -66,7 +68,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-    Route::apiResource('marks', MarkController::class);
+    // Route::apiResource('marks', MarkController::class);
     Route::apiResource('products', ProductController::class);
     Route::apiResource('demands', DemandController::class);
     Route::apiResource('loans', LoanController::class);
