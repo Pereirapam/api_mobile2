@@ -9,12 +9,6 @@ use App\Http\Controllers\MarkController;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'price', 'expiration_date', 'quantity', 'mark_id'];
+    protected $fillable = ['name', 'description', 'price', 'quantity'];
 
-   
-public function mark()
-{
-    return $this->belongsTo(Mark::class);
-}
-
-}
+} 

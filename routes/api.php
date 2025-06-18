@@ -12,8 +12,6 @@ use App\Http\Controllers\DemandController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 
-Route::apiResource('marks', MarkController::class);
-
 
 Route::post('/register', function (Request $request) {
     $request->validate([
@@ -25,7 +23,7 @@ Route::post('/register', function (Request $request) {
     $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
-        'password' => bcrypt($request->password),
+        'password' => Hash::make($request->password),
     ]);
 
     $token = $user->createToken('api-token')->plainTextToken;
@@ -53,8 +51,11 @@ Route::post('/login', function (Request $request) {
     $token = $user->createToken('api-token')->plainTextToken;
 
     return response()->json([
+        'user' => $user,
+        'email' => $request->email,
         'access_token' => $token,
-        'token_type' => 'Bearer',
+        'token_type' => 'Bearer'
+
     ]);
 });
 
@@ -68,7 +69,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-    // Route::apiResource('marks', MarkController::class);
+    Route::apiResource('marks', MarkController::class);
     Route::apiResource('products', ProductController::class);
     Route::apiResource('demands', DemandController::class);
     Route::apiResource('loans', LoanController::class);

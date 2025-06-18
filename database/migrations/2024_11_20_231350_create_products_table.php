@@ -17,9 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description'); 
             $table->decimal('price', 8, 2);
-            $table->date('expiration_date'); 
             $table->integer('quantity'); 
-            $table->foreignId('mark_id')->constrained()->onDelete('cascade'); 
             $table->timestamps();
         });
     }

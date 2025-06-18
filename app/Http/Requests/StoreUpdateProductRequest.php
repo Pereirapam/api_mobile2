@@ -35,16 +35,10 @@ class StoreUpdateProductRequest extends FormRequest
             'price' => [
                     'required',
             ],
-            'expiration_date' => [
-                    'required',
-            ],
             'quantity' => [
                     'required',
             ],
-            'mark_id' => [
-                    'required',
-            ],
-
+           
         ];
     }
 }

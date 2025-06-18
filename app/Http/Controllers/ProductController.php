@@ -17,8 +17,8 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with('mark')->get();
-        return response()->json($products);
+        $products = $this->product->all();
+        return response()->json([ 'dados' => $products]);
     }
 
     /**
@@ -30,9 +30,7 @@ class ProductController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
-            'expiration_date' => $request->expiration_date,
-            'quantity' => $request->quantity,
-            'mark_id' => $request->mark_id,
+            'quantity' => $request->quantity  
         ]);
 
         if ($created) {
@@ -47,7 +45,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $product = $this->product->with('mark')->find($id);
+        $product = $this->product->find($id);
 
         if (!$product) {
             return response()->json(['message' => 'Produto não encontrado'], 404);
@@ -68,7 +66,7 @@ class ProductController extends Controller
         }
 
         $product->update($request->only([
-            'name', 'description', 'price', 'expiration_date', 'quantity', 'mark_id'
+            'name', 'description', 'price', 'quantity'
         ]));
 
         return response()->json($product);

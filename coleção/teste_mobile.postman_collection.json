@@ -1,0 +1,482 @@
+{
+    "info": {
+        "_postman_id": "5296a358-fa33-4bbb-ac38-93b70cb18f49",
+        "name": "teste_mobile",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "43760795",
+        "_collection_link": "https://cloudy-escape-36738.postman.co/workspace/77dcc2f8-c6bb-424c-87c0-ec3872a90ecf/collection/43760795-5296a358-fa33-4bbb-ac38-93b70cb18f49?action=share&source=collection_link&creator=43760795"
+    },
+    "item": [
+        {
+            "name": "registro",
+            "request": {
+                "auth": {
+                    "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"name\": \"fernanda\",\r\n    \"email\": \"fernanda@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"password_confirmation\": \"12345678\"\r\n\r\n\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://ram-strong-carefully.ngrok-free.app/api/register",
+                    "protocol": "https",
+                    "host": [
+                        "ram-strong-carefully",
+                        "ngrok-free",
+                        "app"
+                    ],
+                    "path": [
+                        "api",
+                        "register"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "login",
+            "request": {
+                "auth": {
+                    "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"email\": \"fernanda@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}"
+                },
+                "url": {
+                    "raw": "https://ram-strong-carefully.ngrok-free.app/api/login",
+                    "protocol": "https",
+                    "host": [
+                        "ram-strong-carefully",
+                        "ngrok-free",
+                        "app"
+                    ],
+                    "path": [
+                        "api",
+                        "login"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Marks",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "40|q0Gz4YRa0380w0e3WODfQo9EL2XZ6jkmq1pyRUF89c76ab02",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": ""
+                },
+                "url": {
+                    "raw": "https://ram-strong-carefully.ngrok-free.app/api/marks",
+                    "protocol": "https",
+                    "host": [
+                        "ram-strong-carefully",
+                        "ngrok-free",
+                        "app"
+                    ],
+                    "path": [
+                        "api",
+                        "marks"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "MarkCreate",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "40|q0Gz4YRa0380w0e3WODfQo9EL2XZ6jkmq1pyRUF89c76ab02",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://ram-strong-carefully.ngrok-free.app/api/marks",
+                    "protocol": "https",
+                    "host": [
+                        "ram-strong-carefully",
+                        "ngrok-free",
+                        "app"
+                    ],
+                    "path": [
+                        "api",
+                        "marks"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "MarkEdit",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "40|q0Gz4YRa0380w0e3WODfQo9EL2XZ6jkmq1pyRUF89c76ab02",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"markName\": \"renomeandoTeste\"\r\n}"
+                },
+                "url": {
+                    "raw": "https://ram-strong-carefully.ngrok-free.app/api/marks/9",
+                    "protocol": "https",
+                    "host": [
+                        "ram-strong-carefully",
+                        "ngrok-free",
+                        "app"
+                    ],
+                    "path": [
+                        "api",
+                        "marks",
+                        "9"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "MarkDelete",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "40|q0Gz4YRa0380w0e3WODfQo9EL2XZ6jkmq1pyRUF89c76ab02",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"markName\": \"renomeandoTeste\"\r\n}"
+                },
+                "url": {
+                    "raw": "https://ram-strong-carefully.ngrok-free.app/api/marks/9",
+                    "protocol": "https",
+                    "host": [
+                        "ram-strong-carefully",
+                        "ngrok-free",
+                        "app"
+                    ],
+                    "path": [
+                        "api",
+                        "marks",
+                        "9"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Products",
+            "request": {
+                "method": "GET",
+                "header": []
+            },
+            "response": []
+        },
+        {
+            "name": "ProductCreate",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "40|q0Gz4YRa0380w0e3WODfQo9EL2XZ6jkmq1pyRUF89c76ab02",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"name\": \"lily\",\r\n    \"description\": \"hidratante\"  ,\r\n    \"price\": 120.99  ,\r\n    \"quantity\": 2    \r\n}"
+                },
+                "url": {
+                    "raw": "https://ram-strong-carefully.ngrok-free.app/api/products",
+                    "protocol": "https",
+                    "host": [
+                        "ram-strong-carefully",
+                        "ngrok-free",
+                        "app"
+                    ],
+                    "path": [
+                        "api",
+                        "products"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "ProductUpdate",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "40|q0Gz4YRa0380w0e3WODfQo9EL2XZ6jkmq1pyRUF89c76ab02",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"name\": \"lily\",\r\n    \"description\": \"perfume\"  ,\r\n    \"price\": 12.98  ,\r\n    \"quantity\": 3    \r\n}"
+                },
+                "url": {
+                    "raw": "https://ram-strong-carefully.ngrok-free.app/api/products/13",
+                    "protocol": "https",
+                    "host": [
+                        "ram-strong-carefully",
+                        "ngrok-free",
+                        "app"
+                    ],
+                    "path": [
+                        "api",
+                        "products",
+                        "13"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "ProductDelete",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "40|q0Gz4YRa0380w0e3WODfQo9EL2XZ6jkmq1pyRUF89c76ab02",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": ""
+                },
+                "url": {
+                    "raw": "https://ram-strong-carefully.ngrok-free.app/api/products/13",
+                    "protocol": "https",
+                    "host": [
+                        "ram-strong-carefully",
+                        "ngrok-free",
+                        "app"
+                    ],
+                    "path": [
+                        "api",
+                        "products",
+                        "13"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "logout",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "40|q0Gz4YRa0380w0e3WODfQo9EL2XZ6jkmq1pyRUF89c76ab02",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": ""
+                },
+                "url": {
+                    "raw": "https://ram-strong-carefully.ngrok-free.app/api/logout",
+                    "protocol": "https",
+                    "host": [
+                        "ram-strong-carefully",
+                        "ngrok-free",
+                        "app"
+                    ],
+                    "path": [
+                        "api",
+                        "logout"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
